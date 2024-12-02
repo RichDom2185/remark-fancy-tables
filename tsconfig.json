@@ -5,8 +5,7 @@
     "skipLibCheck": true,
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": true,
-    "verbatimModuleSyntax": true
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src/**/*"]
 }

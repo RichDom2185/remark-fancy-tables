@@ -15,14 +15,21 @@
     "dist"
   ],
   "scripts": {
+    "dev": "tsx watch src/index.ts",
     "build": "tsup src/index.ts",
     "lint": "eslint src",
-    "preview": "yarn build && npm pack --dry-run"
+    "preview": "yarn build && npm pack --dry-run",
+    "test": "ava"
   },
-  "dependencies": {},
+  "dependencies": {
+    "mdast-util-to-hast": "^13.2.0"
+  },
   "devDependencies": {
+    "ava": "^6.2.0",
     "eslint": "^9.16.0",
+    "tsimp": "^2.0.12",
     "tsup": "^8.3.5",
+    "tsx": "^4.19.2",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.16.0"
   },
