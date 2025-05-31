@@ -1,6 +1,18 @@
+import { toHtml } from "hast-util-to-html";
 import { open, write } from "node:fs";
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
+import { fancyTables } from "../../src/handler";
+
+export const fancyTableToHtmlTable = (contents: string): string => {
+  // Ignore types since we know internally that this works
+  const node = {
+    lang: "table",
+    value: contents,
+  } as any;
+  const hastNode = fancyTables({} as any, node);
+  return toHtml(hastNode);
+};
 
 export const writeToFile = async (
   filePath: string,
