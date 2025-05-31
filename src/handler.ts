@@ -46,7 +46,10 @@ export const fancyTables: Handler = (s, node) => {
   const contents = node.value;
   const data = parseContents(contents);
 
-  let cellIndex = 0;
+  const header = data.header
+    ? generateHeader(data.header, data.alignments)
+    : undefined;
+  let cellIndex = header?.nextCellIndex ?? 0;
   const rows: Element[] = [];
 
   const numRows = data.body.length;
@@ -107,7 +110,7 @@ export const fancyTables: Handler = (s, node) => {
       // Default to left alignment
       // TODO: Customize default alignment
       const alignment =
-        (data.alignments[colIndex]?.toLowerCase() as Alignment) ??
+        (data.alignments[cellIndex]?.toLowerCase() as Alignment) ??
         Alignment.LEFT;
       const attrs = {
         colspan: colSpan,
@@ -143,9 +146,55 @@ export const fancyTables: Handler = (s, node) => {
     }
     rows.push(h("tr", rowChildren));
   }
-
   return h("table", [
     // TODO: Add thead
+    header?.element,
     h("tbody", rows),
   ]);
+};
+
+const generateHeader = (
+  header: string,
+  alignments: string[]
+): {
+  element: Element;
+  nextCellIndex: number;
+} => {
+  const [_, ...cells] = header.trim().split("|");
+  assert(() => _ === "");
+  console.debug(`Header has ${cells.length} cells:`, cells);
+  let cellIndex = 0;
+  const rowChildren: Element[] = [];
+  // Ignore trailing empty cell
+  assert(() => cells[cells.length - 1] === "");
+  for (let colIndex = 0; colIndex < cells.length - 1; colIndex++) {
+    const cell = cells[colIndex].trim();
+    console.debug(
+      `Processing header cell ${cellIndex}, col ${colIndex}:`,
+      cell
+    );
+
+    let cleaned = cell.replace(/\\/g, "");
+    const colSpan = cell.length - cleaned.length + 1;
+    cleaned = cleaned.trim();
+    const alignment =
+      (alignments[cellIndex]?.toLowerCase() as Alignment) ?? Alignment.LEFT;
+    const attrs = {
+      colspan: colSpan,
+      align: alignmentToAlign[alignment],
+      dataNthCell: cellIndex + 1,
+    };
+    rowChildren.push(
+      h("td", attrs, [
+        // TODO: {{- cleaned | strip | markdownify | split: '<p>' | shift | join: '<p>' | split: '</p>' | pop | join: '</p>' -}}
+        t(cleaned.trim()),
+      ])
+    );
+    cellIndex += 1;
+  }
+
+  return {
+    element: h("thead", h("tr", rowChildren)),
+    nextCellIndex: cellIndex,
+  };
 };
