@@ -1,7 +1,7 @@
-import type { Element } from "hast";
+import type { Element, ElementContent } from "hast";
 import { h } from "hastscript";
 import { defaultHandlers } from "mdast-util-to-hast";
-import { assert } from "./utils";
+import { assert, t } from "./utils";
 
 /**
  * Default code block handler.
@@ -118,7 +118,10 @@ export const fancyTables: Handler = (s, node) => {
       rowChildren.push(
         h("td", attrs, [
           // TODO: {{- cleaned | strip | markdownify | split: '<p>' | shift | join: '<p>' | split: '</p>' | pop | join: '</p>' -}}
-          ...contentsToAdd.flatMap((c) => [h("br"), c]),
+          t(cleaned.trim()),
+          ...contentsToAdd.flatMap(
+            (c) => [h("br"), t(c)] satisfies ElementContent[]
+          ),
         ])
       );
 
