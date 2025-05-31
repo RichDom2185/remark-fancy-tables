@@ -1,3 +1,4 @@
+import { Alignment } from "./components/features/alignment";
 import { Colspan } from "./components/features/colspan";
 import { Headerless } from "./components/features/headerless";
 import Page from "./components/page";
@@ -12,5 +13,7 @@ export const Docs = () => (
     <h3>2. Column Span and Row Span</h3>
     <h4>Column Span</h4>
     <Colspan />
+    <h3>3. Individual Cell Alignment</h3>
+    <Alignment />
   </Page>
 );
