@@ -22,11 +22,13 @@
     "test": "ava"
   },
   "dependencies": {
+    "hastscript": "^9.0.1",
     "mdast-util-to-hast": "^13.2.0"
   },
   "devDependencies": {
     "ava": "^6.3.0",
     "eslint": "^9.28.0",
+    "hast-util-to-html": "^9.0.5",
     "tsimp": "^2.0.12",
     "tsup": "^8.5.0",
     "tsx": "^4.19.4",
