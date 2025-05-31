@@ -1,3 +1,4 @@
+import { Colspan } from "./components/features/colspan";
 import { Headerless } from "./components/features/headerless";
 import Page from "./components/page";
 
@@ -8,5 +9,8 @@ export const Docs = () => (
     <h2>Features</h2>
     <h3>1. Headerless Tables</h3>
     <Headerless />
+    <h3>2. Column Span and Row Span</h3>
+    <h4>Column Span</h4>
+    <Colspan />
   </Page>
 );
