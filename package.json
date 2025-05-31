@@ -15,7 +15,7 @@
     "dist"
   ],
   "scripts": {
-    "dev": "cross-env NODE_ENV=development yarn docs",
+    "dev": "tsx --watch docs/generate.tsx",
     "docs": "tsx docs/generate.tsx",
     "build": "tsup src/index.ts",
     "lint": "eslint src",
@@ -29,7 +29,6 @@
   "devDependencies": {
     "@types/node": "^22.15.29",
     "ava": "^6.3.0",
-    "cross-env": "^7.0.3",
     "dedent": "^1.6.0",
     "eslint": "^9.28.0",
     "hast-util-to-html": "^9.0.5",
