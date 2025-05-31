@@ -16,6 +16,7 @@
   ],
   "scripts": {
     "dev": "tsx watch src/index.ts",
+    "docs": "tsx docs/index.tsx",
     "build": "tsup src/index.ts",
     "lint": "eslint src",
     "preview": "yarn build && npm pack --dry-run",
@@ -26,9 +27,12 @@
     "mdast-util-to-hast": "^13.2.0"
   },
   "devDependencies": {
+    "@types/node": "^22.15.29",
     "ava": "^6.3.0",
+    "dedent": "^1.6.0",
     "eslint": "^9.28.0",
     "hast-util-to-html": "^9.0.5",
+    "hono": "^4.7.10",
     "tsimp": "^2.0.12",
     "tsup": "^8.5.0",
     "tsx": "^4.19.4",
