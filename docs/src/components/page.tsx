@@ -1,6 +1,5 @@
 import { html } from "hono/html";
 import { FC, PropsWithChildren } from "hono/jsx";
-import { Constants } from "../constants";
 
 type Props = {
   title: string;
@@ -19,7 +18,10 @@ const Page: FC<PropsWithChildren<Props>> = ({
         <meta name="description" content="${description}" />
         <meta name="color-scheme" content="light dark" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href="${Constants.BASE_URL}/styles.css" rel="stylesheet" />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+        />
         <title>${title}</title>
       </head>
       <body>
