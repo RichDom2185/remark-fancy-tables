@@ -78,6 +78,7 @@ export const fancyTables: Handler = (s, node) => {
       const prefix = cleaned.slice(0, 2);
       if (prefix === "^^") {
         // Already handled by the previous row
+        colIndex += 1;
         continue;
       }
 
@@ -88,10 +89,11 @@ export const fancyTables: Handler = (s, node) => {
         lookbelowIndex < numRows;
         lookbelowIndex++
       ) {
-        const nextRowCells = data.body[lookbelowIndex]
+        const [nextRowLeading, ...nextRowCells] = data.body[lookbelowIndex]
           .replace(/\\/g, "|")
           .trim()
           .split("|");
+        assert(() => nextRowLeading === "");
         const cellBelow = nextRowCells[colIndex].trim();
         const prefix = cellBelow.slice(0, 2);
         if (prefix === "^^") {
