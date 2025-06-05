@@ -55,21 +55,15 @@ export const fancyTables: Handler = (s, node) => {
   const numRows = data.body.length;
   for (let rowIndex = 0; rowIndex < numRows; rowIndex++) {
     const row = data.body[rowIndex];
-    console.debug("Processing row", [row]);
 
     const [_, ...cells] = row.trim().split("|");
     assert(() => _ === "");
-    console.debug(`Row ${rowIndex} has ${cells.length} cells:`, cells);
 
     const rowChildren: Element[] = [];
     // Ignore trailing empty cell
     assert(() => cells[cells.length - 1] === "");
     for (let colIndex = 0; colIndex < cells.length - 1; ) {
       const cell = cells[colIndex].trim();
-      console.debug(
-        `Processing cell ${cellIndex} at row ${rowIndex}, col ${colIndex}:`,
-        cell
-      );
 
       let cleaned = cell.replace(/\\/g, "");
       const colSpan = cell.length - cleaned.length + 1;
@@ -141,9 +135,6 @@ export const fancyTables: Handler = (s, node) => {
       }
 
       colIndex += colSpan + carriedOver;
-      console.debug(
-        `Set colIndex to ${colIndex} after processing cell ${cellIndex}`
-      );
       cellIndex += 1;
     }
     rows.push(h("tr", rowChildren));
@@ -164,17 +155,12 @@ const generateHeader = (
 } => {
   const [_, ...cells] = header.trim().split("|");
   assert(() => _ === "");
-  console.debug(`Header has ${cells.length} cells:`, cells);
   let cellIndex = 0;
   const rowChildren: Element[] = [];
   // Ignore trailing empty cell
   assert(() => cells[cells.length - 1] === "");
   for (let colIndex = 0; colIndex < cells.length - 1; colIndex++) {
     const cell = cells[colIndex].trim();
-    console.debug(
-      `Processing header cell ${cellIndex}, col ${colIndex}:`,
-      cell
-    );
 
     let cleaned = cell.replace(/\\/g, "");
     const colSpan = cell.length - cleaned.length + 1;
