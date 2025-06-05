@@ -23,7 +23,9 @@
     "test": "ava"
   },
   "dependencies": {
+    "hast-util-raw": "^9.1.0",
     "hastscript": "^9.0.1",
+    "mdast-util-from-markdown": "^2.0.2",
     "mdast-util-to-hast": "^13.2.0"
   },
   "devDependencies": {
